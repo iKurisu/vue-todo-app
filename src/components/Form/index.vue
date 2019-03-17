@@ -20,17 +20,32 @@
         @input="updateTodo" 
       />
     </form>
-    
+    <div class="form-todos">
+      <FormTodo 
+        v-for="{ name, id } in todos" 
+        :name="name" 
+        :id="id"
+        :key="id" 
+        :remove="removeTodo"
+      />
+    </div>
+    <div class="form-button" @click="submitList">
+      <p>OK</p>
+    </div>
   </div>
 </template>
 
 <script>
 import FormField from './VField';
+import FormTodo from './VTodo';
+
+let id = 0;
 
 export default {
   name: "Form",
   components: {
-    FormField
+    FormField,
+    FormTodo
   },
   data() {
     return {
@@ -52,8 +67,17 @@ export default {
     },
     addTodo(e) {
       e.preventDefault();
-      this.todos.push(this.todo);
+      this.todos.push({
+        name: this.todo,
+        id: id++
+      });
       this.todo = '';
+    },
+    removeTodo(id) {
+      this.todos = this.todos.filter(todo => todo.id !== id);
+    },
+    submitList() {
+      
     }
   }
 }
@@ -90,6 +114,23 @@ export default {
 
 .form-field-wrapper .form-field {
   width: 100%;
+}
+
+.form-todos {
+  width: 15%;
+  max-height: 29vh;
+  overflow-y: hidden;
+  margin-top: -12px;
+}
+
+.form-button {
+  border: 2px solid #555;
+  cursor: pointer;
+  margin-top: 40px;
+}
+
+.form-button p {
+  padding: 7px 30px 3px;
 }
 </style>
 
