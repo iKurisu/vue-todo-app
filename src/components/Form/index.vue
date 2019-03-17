@@ -7,6 +7,12 @@
       @input="updateTitle" 
     /> 
     <FormField 
+      :name="'DUE DATE (M / D / Y)'" 
+      :length="dueDate.length" 
+      :value="dueDate" 
+      @input="updateDueDate" 
+    />
+    <FormField 
       :name="'ADD TODO'" 
       :length="todo.length" 
       :value="todo" 
@@ -26,12 +32,16 @@ export default {
   data() {
     return {
       title: '',
+      dueDate: '',
       todo: ''
     }
   },
   methods: {
     updateTitle(value) {
       this.title = value.toUpperCase();
+    },
+    updateDueDate(value) {
+      this.dueDate = value.toUpperCase();
     },
     updateTodo(value) {
       this.todo = value.toUpperCase()
