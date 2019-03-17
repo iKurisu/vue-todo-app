@@ -12,12 +12,15 @@
       :value="dueDate" 
       @input="updateDueDate" 
     />
-    <FormField 
-      :name="'ADD TODO'" 
-      :length="todo.length" 
-      :value="todo" 
-      @input="updateTodo" 
-    />
+    <form class="form-field-wrapper" @submit="addTodo">
+      <FormField 
+        :name="'ADD TODO'" 
+        :length="todo.length" 
+        :value="todo" 
+        @input="updateTodo" 
+      />
+    </form>
+    
   </div>
 </template>
 
@@ -33,7 +36,8 @@ export default {
     return {
       title: '',
       dueDate: '',
-      todo: ''
+      todo: '',
+      todos: []
     }
   },
   methods: {
@@ -45,6 +49,11 @@ export default {
     },
     updateTodo(value) {
       this.todo = value.toUpperCase()
+    },
+    addTodo(e) {
+      e.preventDefault();
+      this.todos.push(this.todo);
+      this.todo = '';
     }
   }
 }
@@ -73,6 +82,14 @@ export default {
 
   position: relative;
   z-index: 2;
+}
+
+.form-field-wrapper {
+  width: 15%;
+}
+
+.form-field-wrapper .form-field {
+  width: 100%;
 }
 </style>
 
