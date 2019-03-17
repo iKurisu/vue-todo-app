@@ -1,0 +1,56 @@
+@import url("https://use.typekit.net/lkt7nvw.css");
+@import url("https://use.typekit.net/lkt7nvw.css");
+
+@font-face {
+  font-family: "Gill Sans Medium";
+  src: url("./assets/Gill_Sans_Medium.otf");
+}
+
+@font-face {
+  font-family: "Gill Sans Light";
+  src: url("./assets/Gill_Sans_Light.otf");
+}
+
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: "Gill Sans Medium";
+  font-size: 14px;
+}
+
+p, input, label {
+  letter-spacing: 1px;
+}
+
+input, label {
+  font-family: "adobe-garamond-pro";
+  font-size: 14px;
+  font-style: italic;
+}
+
+input {
+  border: 0;
+  outline: none;
+}
+
+.fixed-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.show {
+  z-index: 10;
+  opacity: 1;
+}
+
+.hide {
+  z-index: 9;
+  opacity: 0;
+}

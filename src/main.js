@@ -1,8 +1,9 @@
 import Vue from 'vue'
-import App from './App.vue'
+import app from './App.vue'
+import "./styles.scss";
 
 Vue.config.productionTip = false
 
 new Vue({
-  render: h => h(App),
+  render: h => h(app),
 }).$mount('#app')
