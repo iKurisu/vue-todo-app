@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     setFocus(bool) {
-      this.focused = bool;
+      this.focused = bool
     }
   }
 };

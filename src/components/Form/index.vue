@@ -34,7 +34,7 @@ export default {
       this.title = value.toUpperCase();
     },
     updateTodo(value) {
-      this.todo = value.toUpperCase();
+      this.todo = value.toUpperCase()
     }
   }
 }
