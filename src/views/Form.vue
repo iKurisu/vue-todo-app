@@ -1,6 +1,9 @@
 <template>
   <div :class="[{ show: visible, hide: !visible }, 'fixed-container']">
-    <Form />
+    <Form 
+      :changeView="changeView" 
+      :addList="addList"
+    />
   </div>
 </template>
 
@@ -15,6 +18,14 @@ export default {
   props: {
     visible: {
       type: Boolean,
+      required: true
+    },
+    changeView: {
+      type: Function,
+      required: true
+    },
+    addList: {
+      type: Function,
       required: true
     }
   }

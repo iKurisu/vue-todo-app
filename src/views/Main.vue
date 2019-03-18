@@ -1,26 +1,47 @@
 <template>
   <div :class="[{ show: visible, hide: !visible }, 'fixed-container']">
-    <List :setTodo="setTodo"/>
+    <List 
+      :list="list"
+      :activeId="activeId"
+      :setActive="setActive"
+    />
+    <TodoList 
+      :todoList="list[activeId]"
+      :checkTodo="checkTodo"
+    />
   </div>
 </template>
 
 <script>
 import List from '../components/List';
+import TodoList from '../components/TodoList';
 
 export default {
   name: "MainView",
   components: {
-    List
+    List,
+    TodoList
   },
   props: {
     visible: {
       type: Boolean,
       required: true
-    }
-  },
-  methods: {
-    setTodo(todo) {
-      this.activeTodo = todo;
+    },
+    list: {
+      type: Array,
+      required: true
+    },
+    activeId: {
+      type: Number,
+      required: true
+    },
+    setActive: {
+      type: Function,
+      required: true
+    },
+    checkTodo: {
+      type: Function,
+      required: true
     }
   }
 }

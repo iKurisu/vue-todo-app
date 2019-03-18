@@ -1,11 +1,11 @@
 <template>
   <div class="list-item" 
-    @click="[setActive(item.id), setTodo(item.title)]"
+    @click="setActive(id)"
     @mouseover="setHover(true)" 
     @mouseleave="setHover(false)"
     :style="{ transform: `translate3d(0, ${offset}px, 0)` }"
   >
-    <p>{{ item.title.toUpperCase() }}</p>
+    <p>{{ name }}</p>
     <HoverLine :hovering="hovering" :isActive="isActive" />
   </div>
 </template>
@@ -19,11 +19,11 @@ export default {
     HoverLine
   },
   props: {
-    item: Object,
-    offset: Number,
+    name: String,
+    id: Number,
     isActive: Boolean,
+    offset: Number,
     setActive: Function,
-    setTodo: Function
   },
   data() {
     return {

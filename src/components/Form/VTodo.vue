@@ -1,5 +1,5 @@
 <template>
-  <div class="form-todo" @click="remove(id)">
+  <div class="todo" @click="remove(id)">
     <p>{{ name }}</p>
   </div>
 </template>
@@ -13,7 +13,7 @@ export default {
       required: true
     },
     id: {
-      type: Number,
+      type: String,
       required: true
     },
     remove: {
@@ -23,13 +23,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.form-todo {
-  height: 32px;
-  margin-bottom: 10px;
-  padding-left: 10px;
-  font-family: "adobe-garamond-pro";
-  cursor: pointer;
-}
-</style>
