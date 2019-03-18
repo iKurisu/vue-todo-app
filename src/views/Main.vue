@@ -7,6 +7,7 @@
     />
     <TodoList 
       :todoList="list[activeId]"
+      :checkTodo="checkTodo"
     />
   </div>
 </template>
@@ -35,6 +36,10 @@ export default {
       required: true
     },
     setActive: {
+      type: Function,
+      required: true
+    },
+    checkTodo: {
       type: Function,
       required: true
     }
