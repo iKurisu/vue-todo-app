@@ -3,6 +3,7 @@ export class TodoList {
     this.name = name;
     this.dueDate = dueDate;
     this.todos = todos;
+    this.isActive = false;
     this.id = id;
   }
 }

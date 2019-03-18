@@ -40,7 +40,7 @@ import uniqid from 'uniqid';
 import FormField from './VField';
 import FormTodo from './VTodo';
 import { TodoList, Todo } from './utils';
-import { getLists, post } from '../../utils';
+import { post } from '../../utils';
 
 export default {
   name: "Form",
@@ -81,7 +81,6 @@ export default {
       this.todos = this.todos.filter(todo => todo.id !== id);
     },
     submitList() {
-      const id = getLists().length;
       post(new TodoList(this.title, this.dueDate, this.todos, uniqid()))
       this.changeView();
     }
