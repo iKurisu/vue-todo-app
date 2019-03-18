@@ -6,6 +6,7 @@
       :list="list"
       :activeId="activeId"  
       :setActive="setActive"
+      :checkTodo="checkTodo"
     />
     <FormView 
       :visible="activeView === 'Form' ? true : false" 
@@ -19,7 +20,7 @@
 import MainView from './views/Main';
 import FormView from './views/Form';
 import NewList from './components/New';
-import { getLists } from './utils';
+import { getLists, updateTodo } from './utils';
 
 export default {
   name: 'app',
@@ -50,6 +51,12 @@ export default {
       this.list[id].isActive = true;
       this.list[this.activeId].isActive = false;
       this.activeId = id;
+    },
+    checkTodo(id) {
+      const { todos } = this.list[this.activeId];
+
+      this.list[this.activeId].todos[id].checked = !todos[id].checked;
+      updateTodo(this.activeId, id);
     }
   }
 }

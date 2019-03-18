@@ -5,16 +5,22 @@
       :activeId="activeId"
       :setActive="setActive"
     />
+    <TodoList 
+      :todoList="list[activeId]"
+      :checkTodo="checkTodo"
+    />
   </div>
 </template>
 
 <script>
 import List from '../components/List';
+import TodoList from '../components/TodoList';
 
 export default {
   name: "MainView",
   components: {
-    List
+    List,
+    TodoList
   },
   props: {
     visible: {
@@ -30,6 +36,10 @@ export default {
       required: true
     },
     setActive: {
+      type: Function,
+      required: true
+    },
+    checkTodo: {
       type: Function,
       required: true
     }
