@@ -2,7 +2,10 @@
   <div id="app">
     <NewList :activeView="activeView" :changeView="changeView"/>
     <MainView :visible="activeView === 'Main' ? true : false" />
-    <FormView :visible="activeView === 'Form' ? true : false" />
+    <FormView 
+      :visible="activeView === 'Form' ? true : false" 
+      :changeView="changeView"
+    />
   </div>
 </template>
 

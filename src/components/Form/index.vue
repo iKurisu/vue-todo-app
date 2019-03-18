@@ -48,6 +48,12 @@ export default {
     FormField,
     FormTodo
   },
+  props: {
+    changeView: {
+      type: Function,
+      required: true
+    }
+  },
   data() {
     return {
       title: '',
@@ -77,6 +83,7 @@ export default {
     submitList() {
       const id = getLists().length;
       post(new TodoList(this.title, this.dueDate, this.todos, uniqid()))
+      this.changeView();
     }
   }
 }
