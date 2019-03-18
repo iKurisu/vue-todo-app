@@ -1,6 +1,6 @@
 <template>
   <div class="list-item" 
-    @click="[setActive(id), setTodo(name)]"
+    @click="setActive(id)"
     @mouseover="setHover(true)" 
     @mouseleave="setHover(false)"
     :style="{ transform: `translate3d(0, ${offset}px, 0)` }"
@@ -24,7 +24,6 @@ export default {
     isActive: Boolean,
     offset: Number,
     setActive: Function,
-    setTodo: Function
   },
   data() {
     return {
