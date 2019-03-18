@@ -20,6 +20,7 @@
 body {
   font-family: "Gill Sans Medium";
   font-size: 14px;
+  user-select: none;
 }
 
 p, input, label {
@@ -53,4 +54,11 @@ input {
 .hide {
   z-index: 9;
   opacity: 0;
+}
+
+.todo {
+  margin-bottom: 24px;
+  padding-left: 10px;
+  font-family: "adobe-garamond-pro";
+  cursor: pointer;
 }
