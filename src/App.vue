@@ -10,6 +10,7 @@
     <FormView 
       :visible="activeView === 'Form' ? true : false" 
       :changeView="changeView"
+      :addList="addList"
     />
   </div>
 </template>
@@ -41,6 +42,9 @@ export default {
   methods: {
     changeView() {
       this.activeView = this.activeView === "Main" ? "Form" : "Main";
+    },
+    addList(list) {
+      this.list.push(list);
     },
     setActive(id) {
       this.list[id].isActive = true;

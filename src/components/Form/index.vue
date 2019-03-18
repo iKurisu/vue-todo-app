@@ -52,6 +52,10 @@ export default {
     changeView: {
       type: Function,
       required: true
+    },
+    addList: {
+      type: Function,
+      required: true 
     }
   },
   data() {
@@ -81,7 +85,10 @@ export default {
       this.todos = this.todos.filter(todo => todo.id !== id);
     },
     submitList() {
-      post(new TodoList(this.title, this.dueDate, this.todos, uniqid()))
+      const list = new TodoList(this.title, this.dueDate, this.todos, uniqid())
+      
+      post(list)
+      this.addList(list)
       this.changeView();
     }
   }
