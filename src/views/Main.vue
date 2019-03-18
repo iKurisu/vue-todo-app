@@ -5,16 +5,21 @@
       :activeId="activeId"
       :setActive="setActive"
     />
+    <TodoList 
+      :todoList="list[activeId]"
+    />
   </div>
 </template>
 
 <script>
 import List from '../components/List';
+import TodoList from '../components/TodoList';
 
 export default {
   name: "MainView",
   components: {
-    List
+    List,
+    TodoList
   },
   props: {
     visible: {
