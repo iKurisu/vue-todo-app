@@ -8,14 +8,12 @@
       :isActive="isActive"
       :offset="offset"
       :setActive="setActive"
-      :setTodo="setTodo"
     />
   </div>
 </template>
 
 <script>
 import ListItem from './Item.vue';
-import { getLists } from '../../utils';
 
 export default {
   name: 'List',
@@ -23,26 +21,26 @@ export default {
     ListItem
   },
   props: {
-    setTodo: Function
+    list: {
+      type: Array,
+      required: true
+    },
+    activeId: {
+      type: Number,
+      required: true
+    },
+    setActive: {
+      type: Function,
+      required: true
+    }
   },
   data() {
     return {
-      list: [], 
-      activeId: 0,
       offset: 0,
       lastScroll: null
     }
   },
-  created() {
-    this.list = getLists();
-    this.list[0].isActive = true;
-  },
   methods: {
-    setActive(id) {
-      this.list[id].isActive = true;
-      this.list[this.activeId].isActive = false;
-      this.activeId = id;
-    },
     handleScroll(e) {    
       const itemHeight = 37;
       const max = 0;
