@@ -36,16 +36,23 @@
 </template>
 
 <script>
+import uniqid from 'uniqid';
 import FormField from './VField';
 import FormTodo from './VTodo';
-
-let id = 0;
+import { TodoList, Todo } from './utils';
+import { getLists, post } from '../../utils';
 
 export default {
   name: "Form",
   components: {
     FormField,
     FormTodo
+  },
+  props: {
+    changeView: {
+      type: Function,
+      required: true
+    }
   },
   data() {
     return {
@@ -67,17 +74,16 @@ export default {
     },
     addTodo(e) {
       e.preventDefault();
-      this.todos.push({
-        name: this.todo,
-        id: id++
-      });
+      this.todos.push(new Todo(this.todo, uniqid()));
       this.todo = '';
     },
     removeTodo(id) {
       this.todos = this.todos.filter(todo => todo.id !== id);
     },
     submitList() {
-      
+      const id = getLists().length;
+      post(new TodoList(this.title, this.dueDate, this.todos, uniqid()))
+      this.changeView();
     }
   }
 }
