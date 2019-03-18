@@ -1,5 +1,5 @@
 export const getLists = () => {
-  return JSON.parse(localStorage.getItem('lists') || '[]]');
+  return JSON.parse(localStorage.getItem('lists') || '[]');
 }
 
 export const post = list => {
