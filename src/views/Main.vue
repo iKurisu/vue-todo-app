@@ -1,6 +1,10 @@
 <template>
   <div :class="[{ show: visible, hide: !visible }, 'fixed-container']">
-    <List :setTodo="setTodo"/>
+    <List 
+      :list="list"
+      :activeId="activeId"
+      :setActive="setActive"
+    />
   </div>
 </template>
 
@@ -16,11 +20,18 @@ export default {
     visible: {
       type: Boolean,
       required: true
-    }
-  },
-  methods: {
-    setTodo(todo) {
-      this.activeTodo = todo;
+    },
+    list: {
+      type: Array,
+      required: true
+    },
+    activeId: {
+      type: Number,
+      required: true
+    },
+    setActive: {
+      type: Function,
+      required: true
     }
   }
 }
