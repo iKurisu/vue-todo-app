@@ -2,7 +2,8 @@
   <div
     :class="[
       'form-field', 
-      length > 0 ? 'form-field--visible' : 'form-field--hidden'
+      length > 0 ? 'form-field--visible' : 'form-field--hidden',
+      { 'form-field--error': error }
     ]"
   >
     <p>{{ name }}</p>
@@ -29,6 +30,9 @@ export default {
     length: {
       type: Number,
       required: true
+    },
+    error: {
+      type: Boolean
     },
     value: {
       type: String,
@@ -94,6 +98,15 @@ export default {
 
 .form-field-line--active {
   width: 100%;
+}
+
+.form-field--error .form-field-line {
+  width: 100%;
+  border-color: #ee6666;
+}
+
+.form-field--error input {
+  color: #ee6666;
 }
 </style>
 
