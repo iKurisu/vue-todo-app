@@ -2,6 +2,7 @@
   <div id="app">
     <NewList :activeView="activeView" :changeView="changeView"/>
     <MainView 
+      v-if="list.length > 0"
       :visible="activeView === 'Main' ? true : false" 
       :list="list"
       :activeId="activeId"  
@@ -31,14 +32,19 @@ export default {
   },
   data() {
     return {
-      activeView: 'Form',
       list: [], 
+      activeView: '',
       activeId: 0,
     }
   },
   created() {
     this.list = getLists();
-    this.list[0].isActive = true;
+    if (this.list.length > 0) {
+      this.list[0].isActive = true;
+      this.activeView = 'Main';
+    } else {
+      this.activeView = 'Form';
+    }
   },
   methods: {
     changeView() {
