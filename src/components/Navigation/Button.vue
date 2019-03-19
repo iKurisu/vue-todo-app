@@ -1,6 +1,6 @@
 <template>
   <div class="btn" 
-    @click="changeView"
+    @click="click"
     @mouseover="setHover(true)" 
     @mouseleave="setHover(false)"  
   >
@@ -13,16 +13,16 @@
 import HoverLine from '../VHoverLine';
 
 export default {
-  name: "NewList",
+  name: "NavigationButton",
   components: {
     HoverLine
   },
   props: {
-    activeView: {
+    name: {
       type: String,
       required: true
     },
-    changeView: {
+    click: {
       type: Function,
       required: true
     }
@@ -36,22 +36,14 @@ export default {
     setHover(bool) {
       this.hovering = bool;
     }
-  },
-  computed: {
-    name() {
-      return this.activeView === "Main" ? "NEW LIST" : "GO BACK"
-    }
   }
 }
 </script>
 
 <style lang="scss">
 .btn {
-  position: absolute;
-  top: 5vh;
-  right: 10%;
   cursor: pointer;
-  z-index: 20;
+  margin-right: 20px;
 }
 
 .btn p {
