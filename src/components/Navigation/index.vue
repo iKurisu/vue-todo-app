@@ -3,7 +3,14 @@
     <NavigationButton
       :name="name"
       :activeView="activeView"
-      :click="changeView"
+      :changeView="changeView"
+      :click="setNewForm"
+    />
+    <NavigationButton
+      v-if="activeView === 'Main'"
+      :name="'EDIT LIST'"
+      :activeView="activeView"
+      :click="setEditForm"
     />
     <NavigationButton
       v-if="activeView === 'Main'"
@@ -34,11 +41,25 @@ export default {
     deleteList: {
       type: Function,
       required: true
+    },
+    setFormType: {
+      type: Function,
+      required: true
     }
   },
   computed: {
     name() {
       return this.activeView === 'Main' ? 'NEW LIST' : 'GO BACK';
+    }
+  },
+  methods: {
+    setNewForm() {
+      this.changeView();
+      this.setFormType('new');
+    },
+    setEditForm() {
+      this.changeView();
+      this.setFormType('edit');
     }
   }
 }

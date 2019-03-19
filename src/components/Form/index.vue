@@ -42,7 +42,7 @@ import uniqid from 'uniqid';
 import FormField from './VField';
 import FormTodo from './VTodo';
 import { TodoList, Todo } from './utils';
-import { post } from '../../utils';
+import { getLists, post } from '../../utils';
 
 export default {
   name: "Form",
@@ -58,6 +58,20 @@ export default {
     addList: {
       type: Function,
       required: true 
+    },
+    update: {
+      type: Function,
+      required: true
+    },
+    activeList: {
+      type: Object
+    },
+    activeId: {
+      type: Number
+    },
+    type: {
+      type: String,
+      required: true
     }
   },
   data() {
@@ -68,6 +82,21 @@ export default {
       dateError: false,
       todo: '',
       todos: []
+    }
+  },
+  watch: {
+    type() {
+      if (this.type === 'edit') {
+        const [year, month, day] = this.activeList.dueDate.slice(0, 10).split('-');
+        
+        this.title = this.activeList.name;
+        this.dueDate = `${month}/${day}/${year}`;
+        this.todos = this.activeList.todos;
+      } else {
+        this.title = '';
+        this.dueDate = '';
+        this.todos = [];
+      }
     }
   },
   methods: {
@@ -112,8 +141,13 @@ export default {
         this.todo = '';
         this.todos = [];
         
-        post(list)
-        this.addList(list)
+        if (this.type === 'new') {
+          post(list)
+          this.addList(list)
+        } else {
+          this.update(list);
+        }
+
         this.changeView();
       }
       

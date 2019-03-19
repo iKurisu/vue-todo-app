@@ -23,9 +23,9 @@ export default {
       required: true
     },
     click: {
-      type: Function,
+      type: Function | Array,
       required: true
-    }
+    },
   },
   data() {
     return {
