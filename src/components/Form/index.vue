@@ -3,12 +3,14 @@
     <FormField 
       :name="'TITLE'" 
       :length="title.length" 
+      :error="titleError"
       :value="title" 
       @input="updateTitle" 
     /> 
     <FormField 
       :name="'DUE DATE (M / D / Y)'" 
       :length="dueDate.length" 
+      :error="dateError"
       :value="dueDate" 
       @input="updateDueDate" 
     />
@@ -61,7 +63,9 @@ export default {
   data() {
     return {
       title: '',
+      titleError: false,
       dueDate: '',
+      dateError: false,
       todo: '',
       todos: []
     }
@@ -85,11 +89,34 @@ export default {
       this.todos = this.todos.filter(todo => todo.id !== id);
     },
     submitList() {
-      const list = new TodoList(this.title, this.dueDate, this.todos, uniqid())
+      const [ month, day, year ] = this.dueDate.split('/');
+      const date = new Date(year, month - 1, day, 23, 59, 59);
       
-      post(list)
-      this.addList(list)
-      this.changeView();
+      if (this.title === "") {
+        this.titleError = true;
+      } else {
+        this.titleError = false;
+      }
+
+      if (!date.getTime() || date.getTime() < Date.now()) {
+        this.dateError = true;
+      } else {
+        this.dateError = false;
+      }
+      
+      if (!this.titleError && !this.dateError) {
+        const list = new TodoList(this.title, date, this.todos, uniqid())
+        
+        this.title = '';
+        this.dueDate = '';
+        this.todo = '';
+        this.todos = [];
+        
+        post(list)
+        this.addList(list)
+        this.changeView();
+      }
+      
     }
   }
 }
