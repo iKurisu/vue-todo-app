@@ -2,6 +2,10 @@ export const getLists = () => {
   return JSON.parse(localStorage.getItem('lists') || '[]');
 }
 
+export const updateLists = lists => {
+  localStorage.setItem('lists', JSON.stringify(lists));
+}
+
 export const updateTodo = (listId, todoId) => {
   const lists = getLists();
   const checked = lists[listId].todos[todoId].checked;
