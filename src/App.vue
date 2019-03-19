@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <NewList :activeView="activeView" :changeView="changeView"/>
+    <Navigation 
+      :activeView="activeView" 
+      :changeView="changeView"
+      :deleteList="deleteList"
+    />
     <MainView 
       v-if="list.length > 0"
       :visible="activeView === 'Main' ? true : false" 
@@ -20,15 +24,15 @@
 <script>
 import MainView from './views/Main';
 import FormView from './views/Form';
-import NewList from './components/New';
-import { getLists, updateTodo } from './utils';
+import Navigation from './components/Navigation';
+import { getLists, updateTodo, updateLists } from './utils';
 
 export default {
   name: 'app',
   components: {
     MainView,
     FormView,
-    NewList
+    Navigation
   },
   data() {
     return {
@@ -54,6 +58,15 @@ export default {
     addList(list) {
       this.list.push(list);
       this.setActive(this.list.length - 1);
+    },
+    deleteList() {
+      this.list = this.list.filter((_, i) => i !== this.activeId);
+
+      if (this.list.length) {
+        this.setActive(0);
+      }
+
+      updateLists(this.list);
     },
     setActive(id) {
       this.list[this.activeId].isActive = false;
