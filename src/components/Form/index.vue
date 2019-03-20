@@ -86,6 +86,14 @@ export default {
   },
   watch: {
     type() {
+      this.updateFields()
+    },
+    activeList() {
+      this.updateFields();
+    }
+  },
+  methods: {
+    updateFields() {
       if (this.type === 'edit') {
         const date = new Date(this.activeList.dueDate)
         const day = date.getDate();
@@ -100,9 +108,7 @@ export default {
         this.dueDate = '';
         this.todos = [];
       }
-    }
-  },
-  methods: {
+    },
     updateTitle(value) {
       this.title = value.toUpperCase();
     },
