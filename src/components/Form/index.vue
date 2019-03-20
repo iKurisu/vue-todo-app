@@ -42,7 +42,7 @@ import uniqid from 'uniqid';
 import FormField from './VField';
 import FormTodo from './VTodo';
 import { TodoList, Todo } from './utils';
-import { getLists, post } from '../../utils';
+import { post } from '../../utils';
 
 export default {
   name: "Form",
