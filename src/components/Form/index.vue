@@ -139,11 +139,6 @@ export default {
       if (!this.titleError && !this.dateError) {
         const list = new TodoList(this.title, date, this.todos, uniqid())
         
-        this.title = '';
-        this.dueDate = '';
-        this.todo = '';
-        this.todos = [];
-        
         if (this.type === 'new') {
           post(list)
           this.addList(list)
