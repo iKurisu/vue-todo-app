@@ -145,6 +145,7 @@ export default {
           post(list)
           this.addList(list)
         } else {
+          list.isActive = true;
           this.update(list);
         }
 
