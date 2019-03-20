@@ -68,10 +68,54 @@ export default {
 <style lang="scss">
 .nav {
   position: absolute;
-  top: 5vh;
-  right: 10%;
+  top: 3vh;
+  right: 5%;
   z-index: 20;
 
   display: flex;
+}
+
+@media (max-width: 768px) {
+  .nav {
+    top: 3vh;
+    right: 5%;
+  }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+  .nav {
+    top: 7vh;
+  }
+}
+
+@media (min-width: 768px) {
+  .nav {
+    top: 3vh;
+  }
+}
+
+@media (min-width: 768px) and (orientation: landscape) {
+  .nav {
+    top: calc(2vh + 20px);
+  }
+}
+
+@media (min-width: 1000px) and (orientation: landscape) {
+  .nav {
+    top: calc(3vh + 20px);
+  }
+}
+
+@media (min-width: 1366px) {
+  .nav {
+    right: 7%;
+  }
+}
+
+@media (min-width: 1920px) {
+  .nav {
+    top: 5vh;
+    right: 10%;
+  }
 }
 </style>
