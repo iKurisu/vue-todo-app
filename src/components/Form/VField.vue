@@ -55,7 +55,6 @@ export default {
 <style lang="scss">
 .form-field {
   width: 15%;
-  margin-bottom: 20px;
 }
 
 .form-field p {
