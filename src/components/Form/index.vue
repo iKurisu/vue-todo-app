@@ -87,7 +87,10 @@ export default {
   watch: {
     type() {
       if (this.type === 'edit') {
-        const [year, month, day] = this.activeList.dueDate.slice(0, 10).split('-');
+        const date = new Date(this.activeList.dueDate)
+        const day = date.getDate();
+        const month = date.getMonth() + 1;
+        const year = date.getFullYear();
         
         this.title = this.activeList.name;
         this.dueDate = `${month}/${day}/${year}`;
@@ -135,11 +138,6 @@ export default {
       
       if (!this.titleError && !this.dateError) {
         const list = new TodoList(this.title, date, this.todos, uniqid())
-        
-        this.title = '';
-        this.dueDate = '';
-        this.todo = '';
-        this.todos = [];
         
         if (this.type === 'new') {
           post(list)
