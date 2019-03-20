@@ -23,7 +23,7 @@ export default {
       required: true
     },
     click: {
-      type: Function | Array,
+      type: Function,
       required: true
     },
   },
