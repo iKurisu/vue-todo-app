@@ -87,7 +87,10 @@ export default {
       updateLists(this.list);
     },
     setActive(id) {
-      this.list[this.activeId].isActive = false;
+      if (this.list[this.activeId]) {
+        this.list[this.activeId].isActive = false;
+      }
+      
       this.list[id].isActive = true;
       this.activeId = id;
     },
