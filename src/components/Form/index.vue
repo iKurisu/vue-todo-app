@@ -58,6 +58,20 @@ export default {
     addList: {
       type: Function,
       required: true 
+    },
+    update: {
+      type: Function,
+      required: true
+    },
+    activeList: {
+      type: Object
+    },
+    activeId: {
+      type: Number
+    },
+    type: {
+      type: String,
+      required: true
     }
   },
   data() {
@@ -70,7 +84,31 @@ export default {
       todos: []
     }
   },
+  watch: {
+    type() {
+      this.updateFields()
+    },
+    activeList() {
+      this.updateFields();
+    }
+  },
   methods: {
+    updateFields() {
+      if (this.type === 'edit') {
+        const date = new Date(this.activeList.dueDate)
+        const day = date.getDate();
+        const month = date.getMonth() + 1;
+        const year = date.getFullYear();
+        
+        this.title = this.activeList.name;
+        this.dueDate = `${month}/${day}/${year}`;
+        this.todos = this.activeList.todos;
+      } else {
+        this.title = '';
+        this.dueDate = '';
+        this.todos = [];
+      }
+    },
     updateTitle(value) {
       this.title = value.toUpperCase();
     },
@@ -107,13 +145,14 @@ export default {
       if (!this.titleError && !this.dateError) {
         const list = new TodoList(this.title, date, this.todos, uniqid())
         
-        this.title = '';
-        this.dueDate = '';
-        this.todo = '';
-        this.todos = [];
-        
-        post(list)
-        this.addList(list)
+        if (this.type === 'new') {
+          post(list)
+          this.addList(list)
+        } else {
+          list.isActive = true;
+          this.update(list);
+        }
+
         this.changeView();
       }
       

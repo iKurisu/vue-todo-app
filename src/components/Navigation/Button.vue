@@ -25,7 +25,7 @@ export default {
     click: {
       type: Function,
       required: true
-    }
+    },
   },
   data() {
     return {
