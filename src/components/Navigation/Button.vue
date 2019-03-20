@@ -43,6 +43,9 @@ export default {
 <style lang="scss">
 .btn {
   cursor: pointer;
+}
+
+.btn:not(:last-child) {
   margin-right: 20px;
 }
 
