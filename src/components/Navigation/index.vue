@@ -1,5 +1,5 @@
 <template>
-  <div class="nav">
+  <div class="nav top">
     <NavigationButton
       :name="name"
       :activeView="activeView"
@@ -67,11 +67,25 @@ export default {
 
 <style lang="scss">
 .nav {
-  position: absolute;
-  top: 5vh;
-  right: 10%;
-  z-index: 20;
-
   display: flex;
+  z-index: 20;
+}
+
+@media (max-width: 1366px) {
+  .nav {
+    right: 5%;
+  }
+}
+
+@media (min-width: 1366px) {
+  .nav {
+    right: 7%;
+  }
+}
+
+@media (min-width: 1920px) {
+  .nav {
+    right: 10%;
+  }
 }
 </style>

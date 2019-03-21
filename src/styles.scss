@@ -62,3 +62,43 @@ input {
   font-family: "adobe-garamond-pro";
   cursor: pointer;
 }
+
+.top {
+  position: absolute;
+}
+
+@media (max-width: 768px) {
+  .top {
+    top: 3vh;
+  }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+  .top {
+    top: 7vh;
+  }
+}
+
+@media (min-width: 768px) {
+  .top {
+    top: 3vh;
+  }
+}
+
+@media (min-width: 768px) and (orientation: landscape) {
+  .top {
+    top: calc(2vh + 20px);
+  }
+}
+
+@media (min-width: 1000px) and (orientation: landscape) {
+  .top {
+    top: calc(3vh + 20px);
+  }
+}
+
+@media (min-width: 1920px) {
+  .top {
+    top: 5vh;
+  }
+}

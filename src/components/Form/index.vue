@@ -210,6 +210,96 @@ export default {
 .form-button p {
   padding: 7px 30px 3px;
 }
+
+@media (max-width: 768px) {  
+  .form {
+    margin-top: 15vh;
+  }
+
+  .form-field {
+    margin-bottom: 20px;
+  }
+
+  .form-field, .form-field-wrapper, .form-todos {
+    width: 55%;
+  }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {  
+  .form-field {
+    margin-bottom: 10px;
+  }
+  
+  .form-field, .form-field-wrapper, .form-todos {
+    width: 55%;
+    max-width: 75vh;
+  }
+}
+
+@media (min-width: 768px) {
+  .form {
+    margin-top: 15vh;
+  }
+  
+  .form-field {
+    margin-bottom: 3vh;
+  }
+  
+  .form-field, .form-field-wrapper, .form-todos {
+    width: 40%;
+  }
+}
+
+@media (min-width: 768px) and (orientation: landscape) {
+  .form {
+    margin-top: 15vh;
+  }
+
+  .form-field {
+    margin-bottom: 3vh;
+  }
+  
+  .form-field, .form-field-wrapper, .form-todos {
+    width: 35%;
+  }
+}
+
+@media (min-width: 1000px) {
+  .form-field {
+    margin-bottom: 20px;
+  }
+}
+
+@media (min-width: 1000px) and (orientation: landscape) {
+  .form {
+    margin-top: 15vh;
+  }
+  
+  .form-field, .form-field-wrapper, .form-todos {
+    width: 35%;
+  }
+}
+
+@media (min-width: 1366px) {
+  .form-field {
+    margin-bottom: 30px;
+  }
+  
+  .form-field, .form-field-wrapper, .form-todos {
+    width: 30%;
+    max-width: 55vh;
+  }
+}
+
+@media (min-width: 1920px) {
+  .form-field {
+    margin-bottom: 40px;
+  }
+  
+  .form-field, .form-field-wrapper, .form-todos {
+    width: 20%;
+  }
+}
 </style>
 
 
