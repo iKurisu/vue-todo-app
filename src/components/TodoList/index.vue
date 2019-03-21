@@ -32,10 +32,10 @@ export default {
 
 <style lang="scss">
 .tl {
-  width: 20%;
+  width: 54%;
   position: absolute;
   top: calc(20vh - 4px);
-  right: 34%;
+  left: 46%;
 }
 
 .tl-header {
@@ -51,5 +51,11 @@ export default {
 .todo--checked {
   text-decoration: line-through;
   opacity: .5;
+}
+
+@media (max-width: 767px) {
+  .tl {
+    left: 40%;
+  }
 }
 </style>

@@ -50,4 +50,10 @@ export default {
   color: #1a1a1a;
   width: 100%;
 }
+
+@media (max-width: 767px) {
+  .list-item p {
+    font-size: 2.3vw;
+  }
+}
 </style>

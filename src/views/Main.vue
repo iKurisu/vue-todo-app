@@ -20,7 +20,7 @@ export default {
   name: "MainView",
   components: {
     List,
-    TodoList
+    TodoList,
   },
   props: {
     visible: {
