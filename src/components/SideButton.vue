@@ -1,6 +1,6 @@
 <template>
   <div class="button-container top" @click="setActive">
-    <div :class="['side-button', { 'side-button--active': isActive }]">
+    <div :class="'side-button'">
       <div class="row"/>
       <div class="row"/>
     </div>
@@ -26,11 +26,11 @@ export default {
 <style lang="scss">
 .button-container {
   width: 20px;
-  height: 8px;
+  height: 10px;
   left: 10%;
   display: flex;
   align-items: center;
-  transform: translateY(3px);
+  transform: translateY(2px);
 }
 
 .side-button {
@@ -39,32 +39,18 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: height .3s ease .3s;
   cursor: pointer;
 }
 
 .row {
   width: 100%;
   height: 1px;
-  background: #333;
-  transition: transform .3s ease;
+  background: #555;
 }
 
-.side-button--active {
-  height: 1px;
-  transition-delay: 0s;
-}
-
-.side-button--active .row {
-  transition-delay: .3s;
-}
-
-.side-button--active .row:nth-child(1) {
-  transform: rotate(135deg);
-}
-
-.side-button--active .row:nth-child(2) {
-  transform: rotate(45deg);
+.row:nth-child(2) {
+  width: 65%;
+  transition: width .3s ease;
 }
 </style>
 
