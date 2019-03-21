@@ -52,4 +52,10 @@ export default {
   text-decoration: line-through;
   opacity: .5;
 }
+
+@media (max-width: 767px) {
+  .tl {
+    left: 40%;
+  }
+}
 </style>
