@@ -52,6 +52,12 @@ export default {
   width: 65%;
   transition: width .3s ease;
 }
+
+@media (min-width: 768px) {
+  .button-container {
+    display: none;
+  }
+}
 </style>
 
 
