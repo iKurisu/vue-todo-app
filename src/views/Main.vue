@@ -1,5 +1,6 @@
 <template>
   <div :class="[{ show: visible, hide: !visible }, 'fixed-container']">
+    <SideButton />
     <List 
       :list="list"
       :activeId="activeId"
@@ -15,12 +16,14 @@
 <script>
 import List from '../components/List';
 import TodoList from '../components/TodoList';
+import SideButton from '../components/SideButton';
 
 export default {
   name: "MainView",
   components: {
     List,
-    TodoList
+    TodoList,
+    SideButton
   },
   props: {
     visible: {
