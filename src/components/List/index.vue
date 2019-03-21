@@ -71,4 +71,10 @@ export default {
   flex-direction: column;
   align-items: flex-start;
 }
+
+@media (max-width: 767px) {
+  .list {
+    margin-left: 5%;
+  }
+}
 </style>
