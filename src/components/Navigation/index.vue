@@ -1,5 +1,5 @@
 <template>
-  <div class="nav">
+  <div class="nav top">
     <NavigationButton
       :name="name"
       :activeView="activeView"
@@ -67,42 +67,13 @@ export default {
 
 <style lang="scss">
 .nav {
-  position: absolute;
-  top: 3vh;
-  right: 5%;
-  z-index: 20;
-
   display: flex;
+  z-index: 20;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1366px) {
   .nav {
-    top: 3vh;
     right: 5%;
-  }
-}
-
-@media (max-width: 768px) and (orientation: landscape) {
-  .nav {
-    top: 7vh;
-  }
-}
-
-@media (min-width: 768px) {
-  .nav {
-    top: 3vh;
-  }
-}
-
-@media (min-width: 768px) and (orientation: landscape) {
-  .nav {
-    top: calc(2vh + 20px);
-  }
-}
-
-@media (min-width: 1000px) and (orientation: landscape) {
-  .nav {
-    top: calc(3vh + 20px);
   }
 }
 
@@ -114,7 +85,6 @@ export default {
 
 @media (min-width: 1920px) {
   .nav {
-    top: 5vh;
     right: 10%;
   }
 }
