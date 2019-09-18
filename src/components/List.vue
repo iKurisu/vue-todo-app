@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import ListItem from './Item.vue';
+import ListItem from './list/Item.vue';
 
 export default {
   name: 'List',

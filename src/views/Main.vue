@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import List from '../components/List';
-import TodoList from '../components/TodoList';
+import List from '../components/List.vue';
+import TodoList from '../components/TodoList.vue';
 
 export default {
   name: "MainView",

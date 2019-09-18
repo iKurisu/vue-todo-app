@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import NavigationButton from './Button';
+import NavigationButton from './navigation/Button.vue';
 
 export default {
   name: 'Navigation',

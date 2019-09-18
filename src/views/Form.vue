@@ -1,7 +1,7 @@
 <template>
   <div :class="[{ show: visible, hide: !visible }, 'fixed-container']">
-    <Form 
-      :changeView="changeView" 
+    <Form
+      :changeView="changeView"
       :addList="addList"
       :activeList="activeList"
       :activeId="activeId"
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import Form from '../components/Form';
+import Form from "../components/Form.vue";
 
 export default {
   name: "FormView",
@@ -25,10 +25,10 @@ export default {
       required: true
     },
     activeList: {
-      type: Object,
+      type: Object
     },
     activeId: {
-      type: Number,
+      type: Number
     },
     type: {
       type: String,
@@ -47,5 +47,5 @@ export default {
       required: true
     }
   }
-}
+};
 </script>
