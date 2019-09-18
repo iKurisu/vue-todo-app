@@ -15,10 +15,21 @@
       @input="updateDueDate"
     />
     <form class="form-field-wrapper" @submit="addTodo">
-      <FormField :name="'ADD TODO'" :length="todo.length" :value="todo" @input="updateTodo" />
+      <FormField
+        :name="'ADD TODO'"
+        :length="todo.length"
+        :value="todo"
+        @input="updateTodo"
+      />
     </form>
     <div class="form-todos">
-      <FormTodo v-for="{ name, id } in todos" :name="name" :id="id" :key="id" :remove="removeTodo" />
+      <FormTodo
+        v-for="{ name, id } in todos"
+        :id="id"
+        :key="id"
+        :name="name"
+        :remove="removeTodo"
+      />
     </div>
     <div class="form-button" @click="submitList">
       <p>OK</p>

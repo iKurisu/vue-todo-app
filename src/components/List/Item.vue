@@ -1,20 +1,21 @@
 <template>
-  <div class="list-item" 
+  <div
+    class="list-item"
+    :style="{ transform: `translate3d(0, ${offset}px, 0)` }"
     @click="setActive(id)"
     @mouseover="setHover(true)" 
     @mouseleave="setHover(false)"
-    :style="{ transform: `translate3d(0, ${offset}px, 0)` }"
   >
     <p>{{ name }}</p>
-    <HoverLine :hovering="hovering" :isActive="isActive" />
+    <HoverLine :hovering="hovering" :is-active="isActive" />
   </div>
 </template>
 
 <script>
-import HoverLine from '../VHoverLine';
+import HoverLine from "../VHoverLine";
 
 export default {
-  name: 'ListItem',
+  name: "ListItem",
   components: {
     HoverLine
   },
@@ -28,14 +29,14 @@ export default {
   data() {
     return {
       hovering: false
-    }
+    };
   },
   methods: {
     setHover(bool) {
       this.hovering = bool;
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
@@ -43,7 +44,7 @@ export default {
   margin-bottom: 16px;
   cursor: pointer;
   will-change: transform;
-  transition: transform .5s ease;
+  transition: transform 0.5s ease;
 }
 
 .list-item p {

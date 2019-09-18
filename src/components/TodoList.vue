@@ -2,10 +2,10 @@
   <div class="tl">
     <p class="tl-header">{{ todoList.name }}</p>
     <div class="tl-todos">
-      <p 
-        :class="['todo', { 'todo--checked': todo.checked}]" 
-        v-for="(todo, i) in todoList.todos" 
+      <p
+        v-for="(todo, i) in todoList.todos"
         :key="todo.id"
+        :class="['todo', { 'todo--checked': todo.checked }]"
         @click="checkTodo(i)"
       >
         {{ todo.name }}
@@ -26,8 +26,8 @@ export default {
       type: Function,
       required: true
     }
-  },
-}
+  }
+};
 </script>
 
 <style lang="scss">
@@ -50,7 +50,7 @@ export default {
 
 .todo--checked {
   text-decoration: line-through;
-  opacity: .5;
+  opacity: 0.5;
 }
 
 @media (max-width: 767px) {
