@@ -68,7 +68,8 @@ export default {
       default: () => ({})
     },
     activeId: {
-      type: Number
+      type: Number,
+      required: true
     },
     type: {
       type: String,
@@ -315,5 +316,3 @@ export default {
   }
 }
 </style>
-
-
