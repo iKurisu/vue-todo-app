@@ -1,35 +1,24 @@
 <template>
   <div class="form">
-    <FormField 
-      :name="'TITLE'" 
-      :length="title.length" 
+    <FormField
+      :name="'TITLE'"
+      :length="title.length"
       :error="titleError"
-      :value="title" 
-      @input="updateTitle" 
-    /> 
-    <FormField 
-      :name="'DUE DATE (M / D / Y)'" 
-      :length="dueDate.length" 
+      :value="title"
+      @input="updateTitle"
+    />
+    <FormField
+      :name="'DUE DATE (M / D / Y)'"
+      :length="dueDate.length"
       :error="dateError"
-      :value="dueDate" 
-      @input="updateDueDate" 
+      :value="dueDate"
+      @input="updateDueDate"
     />
     <form class="form-field-wrapper" @submit="addTodo">
-      <FormField 
-        :name="'ADD TODO'" 
-        :length="todo.length" 
-        :value="todo" 
-        @input="updateTodo" 
-      />
+      <FormField :name="'ADD TODO'" :length="todo.length" :value="todo" @input="updateTodo" />
     </form>
     <div class="form-todos">
-      <FormTodo 
-        v-for="{ name, id } in todos" 
-        :name="name" 
-        :id="id"
-        :key="id" 
-        :remove="removeTodo"
-      />
+      <FormTodo v-for="{ name, id } in todos" :name="name" :id="id" :key="id" :remove="removeTodo" />
     </div>
     <div class="form-button" @click="submitList">
       <p>OK</p>
@@ -38,11 +27,11 @@
 </template>
 
 <script>
-import uniqid from 'uniqid';
-import FormField from './VField';
-import FormTodo from './VTodo';
-import { TodoList, Todo } from './utils';
-import { post } from '../../utils';
+import uniqid from "uniqid";
+import FormField from "./form/VField";
+import FormTodo from "./form/VTodo";
+import { TodoList, Todo } from "./form/utils";
+import { post } from "../utils";
 
 export default {
   name: "Form",
@@ -57,7 +46,7 @@ export default {
     },
     addList: {
       type: Function,
-      required: true 
+      required: true
     },
     update: {
       type: Function,
@@ -76,17 +65,17 @@ export default {
   },
   data() {
     return {
-      title: '',
+      title: "",
       titleError: false,
-      dueDate: '',
+      dueDate: "",
       dateError: false,
-      todo: '',
+      todo: "",
       todos: []
-    }
+    };
   },
   watch: {
     type() {
-      this.updateFields()
+      this.updateFields();
     },
     activeList() {
       this.updateFields();
@@ -94,18 +83,18 @@ export default {
   },
   methods: {
     updateFields() {
-      if (this.type === 'edit') {
-        const date = new Date(this.activeList.dueDate)
+      if (this.type === "edit") {
+        const date = new Date(this.activeList.dueDate);
         const day = date.getDate();
         const month = date.getMonth() + 1;
         const year = date.getFullYear();
-        
+
         this.title = this.activeList.name;
         this.dueDate = `${month}/${day}/${year}`;
         this.todos = this.activeList.todos;
       } else {
-        this.title = '';
-        this.dueDate = '';
+        this.title = "";
+        this.dueDate = "";
         this.todos = [];
       }
     },
@@ -116,20 +105,20 @@ export default {
       this.dueDate = value.toUpperCase();
     },
     updateTodo(value) {
-      this.todo = value.toUpperCase()
+      this.todo = value.toUpperCase();
     },
     addTodo(e) {
       e.preventDefault();
       this.todos.push(new Todo(this.todo, uniqid()));
-      this.todo = '';
+      this.todo = "";
     },
     removeTodo(id) {
       this.todos = this.todos.filter(todo => todo.id !== id);
     },
     submitList() {
-      const [ month, day, year ] = this.dueDate.split('/');
+      const [month, day, year] = this.dueDate.split("/");
       const date = new Date(year, month - 1, day, 23, 59, 59);
-      
+
       if (this.title === "") {
         this.titleError = true;
       } else {
@@ -141,13 +130,13 @@ export default {
       } else {
         this.dateError = false;
       }
-      
+
       if (!this.titleError && !this.dateError) {
-        const list = new TodoList(this.title, date, this.todos, uniqid())
-        
-        if (this.type === 'new') {
-          post(list)
-          this.addList(list)
+        const list = new TodoList(this.title, date, this.todos, uniqid());
+
+        if (this.type === "new") {
+          post(list);
+          this.addList(list);
         } else {
           list.isActive = true;
           this.update(list);
@@ -155,10 +144,9 @@ export default {
 
         this.changeView();
       }
-      
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
@@ -211,7 +199,7 @@ export default {
   padding: 7px 30px 3px;
 }
 
-@media (max-width: 768px) {  
+@media (max-width: 768px) {
   .form {
     margin-top: 15vh;
   }
@@ -220,17 +208,21 @@ export default {
     margin-bottom: 20px;
   }
 
-  .form-field, .form-field-wrapper, .form-todos {
+  .form-field,
+  .form-field-wrapper,
+  .form-todos {
     width: 55%;
   }
 }
 
-@media (max-width: 768px) and (orientation: landscape) {  
+@media (max-width: 768px) and (orientation: landscape) {
   .form-field {
     margin-bottom: 10px;
   }
-  
-  .form-field, .form-field-wrapper, .form-todos {
+
+  .form-field,
+  .form-field-wrapper,
+  .form-todos {
     width: 55%;
     max-width: 75vh;
   }
@@ -240,12 +232,14 @@ export default {
   .form {
     margin-top: 15vh;
   }
-  
+
   .form-field {
     margin-bottom: 3vh;
   }
-  
-  .form-field, .form-field-wrapper, .form-todos {
+
+  .form-field,
+  .form-field-wrapper,
+  .form-todos {
     width: 40%;
   }
 }
@@ -258,8 +252,10 @@ export default {
   .form-field {
     margin-bottom: 3vh;
   }
-  
-  .form-field, .form-field-wrapper, .form-todos {
+
+  .form-field,
+  .form-field-wrapper,
+  .form-todos {
     width: 35%;
   }
 }
@@ -274,8 +270,10 @@ export default {
   .form {
     margin-top: 15vh;
   }
-  
-  .form-field, .form-field-wrapper, .form-todos {
+
+  .form-field,
+  .form-field-wrapper,
+  .form-todos {
     width: 35%;
   }
 }
@@ -284,8 +282,10 @@ export default {
   .form-field {
     margin-bottom: 30px;
   }
-  
-  .form-field, .form-field-wrapper, .form-todos {
+
+  .form-field,
+  .form-field-wrapper,
+  .form-todos {
     width: 30%;
     max-width: 55vh;
   }
@@ -295,8 +295,10 @@ export default {
   .form-field {
     margin-bottom: 40px;
   }
-  
-  .form-field, .form-field-wrapper, .form-todos {
+
+  .form-field,
+  .form-field-wrapper,
+  .form-todos {
     width: 20%;
   }
 }
