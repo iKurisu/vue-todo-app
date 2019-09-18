@@ -1,39 +1,39 @@
 <template>
   <div id="app">
-    <Navigation 
-      :activeView="activeView" 
-      :changeView="changeView"
-      :deleteList="deleteList"
-      :setFormType="setFormType"
+    <Navigation
+      :active-view="activeView"
+      :change-view="changeView"
+      :delete-list="deleteList"
+      :set-form-type="setFormType"
     />
-    <MainView 
+    <MainView
       v-if="list.length > 0"
-      :visible="activeView === 'Main' ? true : false" 
+      :visible="activeView === 'Main' ? true : false"
       :list="list"
-      :activeId="activeId"  
-      :setActive="setActive"
-      :checkTodo="checkTodo"
+      :active-id="activeId"
+      :set-active="setActive"
+      :check-todo="checkTodo"
     />
-    <FormView 
-      :visible="activeView === 'Form' ? true : false" 
-      :activeList="list[activeId]"
-      :activeId="activeId"
+    <FormView
+      :visible="activeView === 'Form' ? true : false"
+      :active-list="list[activeId]"
+      :active-id="activeId"
       :type="formType"
-      :changeView="changeView"
-      :addList="addList"
+      :change-view="changeView"
+      :add-list="addList"
       :update="update"
     />
   </div>
 </template>
 
 <script>
-import MainView from './views/Main';
-import FormView from './views/Form';
-import Navigation from './components/Navigation';
-import { getLists, updateTodo, updateLists, updateList } from './utils';
+import MainView from "./views/Main";
+import FormView from "./views/Form";
+import Navigation from "./components/Navigation";
+import { getLists, updateTodo, updateLists, updateList } from "./utils";
 
 export default {
-  name: 'app',
+  name: "App",
   components: {
     MainView,
     FormView,
@@ -41,27 +41,27 @@ export default {
   },
   data() {
     return {
-      list: [], 
-      activeView: '',
+      list: [],
+      activeView: "",
       activeId: 0,
-      formType: 'new'
-    }
+      formType: "new"
+    };
   },
   created() {
     this.list = getLists();
     if (this.list.length > 0) {
       this.list[0].isActive = true;
       this.activeId = 0;
-      this.activeView = 'Main';
+      this.activeView = "Main";
     } else {
-      this.activeView = 'Form';
+      this.activeView = "Form";
     }
   },
   methods: {
     changeView() {
       this.activeView = this.activeView === "Main" ? "Form" : "Main";
     },
-    setFormType(type) {      
+    setFormType(type) {
       this.formType = type;
     },
     addList(list) {
@@ -90,7 +90,7 @@ export default {
       if (this.list[this.activeId]) {
         this.list[this.activeId].isActive = false;
       }
-      
+
       this.list[id].isActive = true;
       this.activeId = id;
     },
@@ -101,10 +101,7 @@ export default {
       updateTodo(this.activeId, id);
     }
   }
-}
-
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

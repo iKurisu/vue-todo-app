@@ -1,19 +1,20 @@
 <template>
   <div
     :class="[
-      'form-field', 
+      'form-field',
       length > 0 ? 'form-field--visible' : 'form-field--hidden',
       { 'form-field--error': error }
     ]"
   >
     <p>{{ name }}</p>
-    <input 
-      type="text" 
+    <input
+      type="text"
       spellcheck="false"
-      :value="value" 
+      :value="value"
       @input="$emit('input', $event.target.value)"
-      @focus="setFocus(true)" @blur="setFocus(false)"
-    >
+      @focus="setFocus(true)"
+      @blur="setFocus(false)"
+    />
     <div :class="['form-field-line', { 'form-field-line--active': focused }]" />
     <label>{{ name }}</label>
   </div>
@@ -38,15 +39,15 @@ export default {
       type: String,
       required: true
     }
-  }, 
+  },
   data() {
     return {
       focused: false
-    }
+    };
   },
   methods: {
     setFocus(bool) {
-      this.focused = bool
+      this.focused = bool;
     }
   }
 };
@@ -92,7 +93,7 @@ export default {
   position: relative;
   top: -1px;
   z-index: 3;
-  transition: width .3s ease;
+  transition: width 0.3s ease;
 }
 
 .form-field-line--active {
@@ -108,4 +109,3 @@ export default {
   color: #ee6666;
 }
 </style>
-

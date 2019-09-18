@@ -1,26 +1,19 @@
 <template>
   <div :class="[{ show: visible, hide: !visible }, 'fixed-container']">
-    <List 
-      :list="list"
-      :activeId="activeId"
-      :setActive="setActive"
-    />
-    <TodoList 
-      :todoList="list[activeId]"
-      :checkTodo="checkTodo"
-    />
+    <List :list="list" :active-id="activeId" :set-active="setActive" />
+    <TodoList :todo-list="list[activeId]" :check-todo="checkTodo" />
   </div>
 </template>
 
 <script>
-import List from '../components/List.vue';
-import TodoList from '../components/TodoList.vue';
+import List from "../components/List.vue";
+import TodoList from "../components/TodoList.vue";
 
 export default {
   name: "MainView",
   components: {
     List,
-    TodoList,
+    TodoList
   },
   props: {
     visible: {
@@ -44,6 +37,5 @@ export default {
       required: true
     }
   }
-}
+};
 </script>
-

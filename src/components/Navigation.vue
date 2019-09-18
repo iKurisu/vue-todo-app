@@ -1,31 +1,33 @@
 <template>
   <div class="nav top">
     <NavigationButton
-      :name="name"
-      :activeView="activeView"
-      :changeView="changeView"
+      v-if="activeView === 'Form'"
+      :name="'GO BACK'"
+      :click="setNewForm"
+    />
+    <NavigationButton
+      v-if="activeView === 'Main'"
+      :name="'NEW LIST'"
       :click="setNewForm"
     />
     <NavigationButton
       v-if="activeView === 'Main'"
       :name="'EDIT LIST'"
-      :activeView="activeView"
       :click="setEditForm"
     />
     <NavigationButton
       v-if="activeView === 'Main'"
       :name="'DELETE LIST'"
-      :activeView="activeView"
       :click="deleteList"
     />
   </div>
 </template>
 
 <script>
-import NavigationButton from './navigation/Button.vue';
+import NavigationButton from "./navigation/Button.vue";
 
 export default {
-  name: 'Navigation',
+  name: "Navigation",
   components: {
     NavigationButton
   },
@@ -49,20 +51,20 @@ export default {
   },
   computed: {
     name() {
-      return this.activeView === 'Main' ? 'NEW LIST' : 'GO BACK';
+      return this.activeView === "Main" ? "NEW LIST" : "GO BACK";
     }
   },
   methods: {
     setNewForm() {
       this.changeView();
-      this.setFormType('new');
+      this.setFormType("new");
     },
     setEditForm() {
       this.changeView();
-      this.setFormType('edit');
+      this.setFormType("edit");
     }
   }
-}
+};
 </script>
 
 <style lang="scss">

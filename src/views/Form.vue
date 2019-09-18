@@ -1,10 +1,10 @@
 <template>
   <div :class="[{ show: visible, hide: !visible }, 'fixed-container']">
     <Form
-      :changeView="changeView"
-      :addList="addList"
-      :activeList="activeList"
-      :activeId="activeId"
+      :change-view="changeView"
+      :add-list="addList"
+      :active-list="activeList"
+      :active-id="activeId"
       :update="update"
       :type="type"
     />
@@ -25,10 +25,12 @@ export default {
       required: true
     },
     activeList: {
-      type: Object
+      type: Object,
+      default: () => ({})
     },
     activeId: {
-      type: Number
+      type: Number,
+      required: true
     },
     type: {
       type: String,
