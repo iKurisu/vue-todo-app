@@ -64,7 +64,8 @@ export default {
       required: true
     },
     activeList: {
-      type: Object
+      type: Object,
+      default: () => ({})
     },
     activeId: {
       type: Number
