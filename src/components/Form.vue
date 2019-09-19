@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 import uniqid from "uniqid";
 import FormField from "./form/VField";
 import FormTodo from "./form/VTodo";
@@ -51,10 +52,6 @@ export default {
     FormTodo
   },
   props: {
-    changeView: {
-      type: Function,
-      required: true
-    },
     addList: {
       type: Function,
       required: true
@@ -95,6 +92,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(["changeView"]),
     updateFields() {
       if (this.type === "edit") {
         const date = new Date(this.activeList.dueDate);

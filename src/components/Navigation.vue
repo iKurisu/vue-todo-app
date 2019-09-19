@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from "vuex";
 import NavigationButton from "./navigation/Button.vue";
 
 export default {
@@ -32,14 +33,6 @@ export default {
     NavigationButton
   },
   props: {
-    activeView: {
-      type: String,
-      required: true
-    },
-    changeView: {
-      type: Function,
-      required: true
-    },
     deleteList: {
       type: Function,
       required: true
@@ -49,12 +42,11 @@ export default {
       required: true
     }
   },
-  computed: {
-    name() {
-      return this.activeView === "Main" ? "NEW LIST" : "GO BACK";
-    }
-  },
+  computed: mapState({
+    activeView: ({ view }) => view.activeView
+  }),
   methods: {
+    ...mapMutations(["changeView"]),
     setNewForm() {
       this.changeView();
       this.setFormType("new");
