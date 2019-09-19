@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import List from "../components/List.vue";
 import TodoList from "../components/TodoList.vue";
 
@@ -16,10 +17,6 @@ export default {
     TodoList
   },
   props: {
-    visible: {
-      type: Boolean,
-      required: true
-    },
     list: {
       type: Array,
       required: true
@@ -36,6 +33,11 @@ export default {
       type: Function,
       required: true
     }
+  },
+  computed: {
+    ...mapGetters({
+      visible: "mainIsVisible"
+    })
   }
 };
 </script>

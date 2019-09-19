@@ -1,25 +1,17 @@
 <template>
   <div id="app">
-    <Navigation
-      :active-view="activeView"
-      :change-view="changeView"
-      :delete-list="deleteList"
-      :set-form-type="setFormType"
-    />
+    <Navigation :delete-list="deleteList" :set-form-type="setFormType" />
     <MainView
       v-if="list.length > 0"
-      :visible="activeView === 'Main' ? true : false"
       :list="list"
       :active-id="activeId"
       :set-active="setActive"
       :check-todo="checkTodo"
     />
     <FormView
-      :visible="activeView === 'Form' ? true : false"
       :active-list="list[activeId]"
       :active-id="activeId"
       :type="formType"
-      :change-view="changeView"
       :add-list="addList"
       :update="update"
     />
@@ -27,6 +19,7 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 import MainView from "./views/Main";
 import FormView from "./views/Form";
 import Navigation from "./components/Navigation";
@@ -42,7 +35,6 @@ export default {
   data() {
     return {
       list: [],
-      activeView: "",
       activeId: 0,
       formType: "new"
     };
@@ -52,15 +44,13 @@ export default {
     if (this.list.length > 0) {
       this.list[0].isActive = true;
       this.activeId = 0;
-      this.activeView = "Main";
+      this.changeView("Main");
     } else {
-      this.activeView = "Form";
+      this.changeView("Form");
     }
   },
   methods: {
-    changeView() {
-      this.activeView = this.activeView === "Main" ? "Form" : "Main";
-    },
+    ...mapMutations(["changeView"]),
     setFormType(type) {
       this.formType = type;
     },

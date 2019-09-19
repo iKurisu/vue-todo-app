@@ -1,7 +1,6 @@
 <template>
   <div :class="[{ show: visible, hide: !visible }, 'fixed-container']">
     <Form
-      :change-view="changeView"
       :add-list="addList"
       :active-list="activeList"
       :active-id="activeId"
@@ -12,6 +11,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import Form from "../components/Form.vue";
 
 export default {
@@ -20,10 +20,6 @@ export default {
     Form
   },
   props: {
-    visible: {
-      type: Boolean,
-      required: true
-    },
     activeList: {
       type: Object,
       default: () => ({})
@@ -36,10 +32,6 @@ export default {
       type: String,
       required: true
     },
-    changeView: {
-      type: Function,
-      required: true
-    },
     addList: {
       type: Function,
       required: true
@@ -48,6 +40,11 @@ export default {
       type: Function,
       required: true
     }
+  },
+  computed: {
+    ...mapGetters({
+      visible: "formIsVisible"
+    })
   }
 };
 </script>
