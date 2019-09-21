@@ -1,18 +1,17 @@
 <template>
   <div class="list" @wheel="handleScroll">
     <ListItem
-      v-for="({ name, id, isActive }, i) in list"
-      :id="i"
-      :key="id"
-      :name="name"
-      :is-active="isActive"
+      v-for="list in lists"
+      :key="list.id"
+      :list="list"
+      :active-list-id="activeListId"
       :offset="offset"
-      :set-active="setActive"
     />
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 import ListItem from "./list/Item.vue";
 
 export default {
@@ -20,26 +19,16 @@ export default {
   components: {
     ListItem
   },
-  props: {
-    list: {
-      type: Array,
-      required: true
-    },
-    activeId: {
-      type: Number,
-      required: true
-    },
-    setActive: {
-      type: Function,
-      required: true
-    }
-  },
   data() {
     return {
       offset: 0,
       lastScroll: null
     };
   },
+  computed: mapState({
+    lists: state => state.todoLists.lists,
+    activeListId: state => state.todoLists.activeListId
+  }),
   methods: {
     handleScroll(e) {
       const itemHeight = 37;
