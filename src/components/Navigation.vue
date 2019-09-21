@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapMutations, mapActions } from "vuex";
 import NavigationButton from "./navigation/Button.vue";
 
 export default {
@@ -33,10 +33,6 @@ export default {
     NavigationButton
   },
   props: {
-    deleteList: {
-      type: Function,
-      required: true
-    },
     setFormType: {
       type: Function,
       required: true
@@ -47,6 +43,7 @@ export default {
   }),
   methods: {
     ...mapMutations(["changeView"]),
+    ...mapActions(["deleteList"]),
     setNewForm() {
       this.changeView();
       this.setFormType("new");

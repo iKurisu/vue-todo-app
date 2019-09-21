@@ -2,16 +2,17 @@
   <div
     class="list-item"
     :style="{ transform: `translate3d(0, ${offset}px, 0)` }"
-    @click="setActive(id)"
+    @click="setActiveListId(list.id)"
     @mouseover="setHover(true)"
     @mouseleave="setHover(false)"
   >
-    <p>{{ name }}</p>
-    <HoverLine :hovering="hovering" :is-active="isActive" />
+    <p>{{ list.title }}</p>
+    <HoverLine :hovering="hovering" :is-active="activeListId === list.id" />
   </div>
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 import HoverLine from "../VHoverLine";
 
 export default {
@@ -20,24 +21,16 @@ export default {
     HoverLine
   },
   props: {
-    name: {
+    list: {
+      type: Object,
+      required: true
+    },
+    activeListId: {
       type: String,
-      required: true
-    },
-    id: {
-      type: Number,
-      required: true
-    },
-    isActive: {
-      type: Boolean,
       required: true
     },
     offset: {
       type: Number,
-      required: true
-    },
-    setActive: {
-      type: Function,
       required: true
     }
   },
@@ -47,6 +40,7 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(["setActiveListId"]),
     setHover(bool) {
       this.hovering = bool;
     }

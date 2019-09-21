@@ -1,32 +1,26 @@
 <template>
   <div class="tl">
-    <p class="tl-header">{{ todoList.name }}</p>
+    <p class="tl-header">{{ activeList.title }}</p>
     <div class="tl-todos">
       <p
-        v-for="(todo, i) in todoList.todos"
-        :key="todo.id"
-        :class="['todo', { 'todo--checked': todo.checked }]"
-        @click="checkTodo(i)"
+        v-for="{ name, checked, id } in activeList.todos"
+        :key="id"
+        :class="['todo', { 'todo--checked': checked }]"
+        @click="checkTodo(id)"
       >
-        {{ todo.name }}
+        {{ name }}
       </p>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
+
 export default {
   name: "TodoList",
-  props: {
-    todoList: {
-      type: Object,
-      required: true
-    },
-    checkTodo: {
-      type: Function,
-      required: true
-    }
-  }
+  computed: mapGetters(["activeList"]),
+  methods: mapActions(["checkTodo"])
 };
 </script>
 

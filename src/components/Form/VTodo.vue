@@ -1,6 +1,6 @@
 <template>
-  <div class="todo" @click="remove(id)">
-    <p>{{ name }}</p>
+  <div class="todo" @click="remove(todo.id)">
+    <p>{{ todo.name }}</p>
   </div>
 </template>
 
@@ -8,12 +8,8 @@
 export default {
   name: "FormTodo",
   props: {
-    name: {
-      type: String,
-      required: true
-    },
-    id: {
-      type: String,
+    todo: {
+      type: Object,
       required: true
     },
     remove: {

@@ -24,10 +24,9 @@
     </form>
     <div class="form-todos">
       <FormTodo
-        v-for="{ name, id } in todos"
-        :id="id"
-        :key="id"
-        :name="name"
+        v-for="todoItem in todos"
+        :key="todoItem.id"
+        :todo="todoItem"
         :remove="removeTodo"
       />
     </div>
@@ -38,12 +37,10 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations, mapActions, mapState, mapGetters } from "vuex";
 import uniqid from "uniqid";
 import FormField from "./form/VField";
 import FormTodo from "./form/VTodo";
-import { TodoList, Todo } from "./form/utils";
-import { post } from "../utils";
 
 export default {
   name: "Form",
@@ -52,22 +49,6 @@ export default {
     FormTodo
   },
   props: {
-    addList: {
-      type: Function,
-      required: true
-    },
-    update: {
-      type: Function,
-      required: true
-    },
-    activeList: {
-      type: Object,
-      default: () => ({})
-    },
-    activeId: {
-      type: Number,
-      required: true
-    },
     type: {
       type: String,
       required: true
@@ -76,12 +57,18 @@ export default {
   data() {
     return {
       title: "",
-      titleError: false,
       dueDate: "",
-      dateError: false,
       todo: "",
-      todos: []
+      todos: [],
+      titleError: false,
+      dateError: false
     };
+  },
+  computed: {
+    ...mapState({
+      activeListId: state => state.todoLists.activeListId
+    }),
+    ...mapGetters(["activeList"])
   },
   watch: {
     type() {
@@ -93,6 +80,7 @@ export default {
   },
   methods: {
     ...mapMutations(["changeView"]),
+    ...mapActions(["addList", "updateList"]),
     updateFields() {
       if (this.type === "edit") {
         const date = new Date(this.activeList.dueDate);
@@ -100,7 +88,7 @@ export default {
         const month = date.getMonth() + 1;
         const year = date.getFullYear();
 
-        this.title = this.activeList.name;
+        this.title = this.activeList.title;
         this.dueDate = `${month}/${day}/${year}`;
         this.todos = this.activeList.todos;
       } else {
@@ -120,7 +108,7 @@ export default {
     },
     addTodo(e) {
       e.preventDefault();
-      this.todos.push(new Todo(this.todo, uniqid()));
+      this.todos.push({ name: this.todo, id: uniqid(), checked: false });
       this.todo = "";
     },
     removeTodo(id) {
@@ -128,29 +116,27 @@ export default {
     },
     submitList() {
       const [month, day, year] = this.dueDate.split("/");
-      const date = new Date(year, month - 1, day, 23, 59, 59);
+      const dueDate = new Date(year, month - 1, day, 23, 59, 59);
 
-      if (this.title === "") {
-        this.titleError = true;
-      } else {
-        this.titleError = false;
-      }
-
-      if (!date.getTime() || date.getTime() < Date.now()) {
-        this.dateError = true;
-      } else {
-        this.dateError = false;
-      }
+      this.titleError = this.title === "";
+      this.dateError = !dueDate.getTime() || dueDate.getTime() < Date.now();
 
       if (!this.titleError && !this.dateError) {
-        const list = new TodoList(this.title, date, this.todos, uniqid());
-
         if (this.type === "new") {
-          post(list);
-          this.addList(list);
+          this.addList({
+            dueDate,
+            title: this.title,
+            todos: this.todos,
+            id: uniqid(),
+            isActive: true
+          });
         } else {
-          list.isActive = true;
-          this.update(list);
+          this.updateList({
+            dueDate,
+            title: this.title,
+            todos: this.todos,
+            id: this.activeListId
+          });
         }
 
         this.changeView();

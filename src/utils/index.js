@@ -9,11 +9,11 @@ export const updateLists = lists => {
 export const updateList = (id, editedList) => {
   const lists = getLists();
 
-  for (let property in editedList) {
-    lists[id][property] = editedList[property];
-  }
+  const updatedLists = lists.map(list =>
+    list.id === id ? { ...list, ...editedList } : list
+  );
 
-  updateLists(lists);
+  updateLists(updatedLists);
 };
 
 export const updateTodo = (listId, todoId) => {
