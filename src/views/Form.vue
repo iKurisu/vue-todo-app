@@ -1,6 +1,6 @@
 <template>
   <div :class="[{ show: visible, hide: !visible }, 'fixed-container']">
-    <Form :type="type" />
+    <Form />
   </div>
 </template>
 
@@ -12,12 +12,6 @@ export default {
   name: "FormView",
   components: {
     Form
-  },
-  props: {
-    type: {
-      type: String,
-      required: true
-    }
   },
   computed: {
     ...mapGetters({

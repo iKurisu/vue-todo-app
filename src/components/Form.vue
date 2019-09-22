@@ -49,12 +49,6 @@ export default {
     FormField,
     FormTodo
   },
-  props: {
-    type: {
-      type: String,
-      required: true
-    }
-  },
   data() {
     return {
       title: "",
@@ -67,12 +61,13 @@ export default {
   },
   computed: {
     ...mapState({
-      activeListId: state => state.todoLists.activeListId
+      activeListId: state => state.todoLists.activeListId,
+      formType: state => state.form.type
     }),
     ...mapGetters(["activeList"])
   },
   watch: {
-    type() {
+    formType() {
       this.updateFields();
     },
     activeList() {
@@ -80,10 +75,10 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(["changeView"]),
+    ...mapMutations(["changeView", "setFormType"]),
     ...mapActions(["addList", "updateList"]),
     updateFields() {
-      if (this.type === "edit") {
+      if (this.formType === "Edit") {
         this.title = this.activeList.title;
         this.dueDate = ISOToShort(this.activeList.dueDate.toISOString());
         this.todos = this.activeList.todos;
@@ -117,7 +112,7 @@ export default {
       this.dateError = !dueDate.getTime() || dueDate.getTime() < Date.now();
 
       if (!this.titleError && !this.dateError) {
-        if (this.type === "new") {
+        if (this.formType === "New") {
           this.addList({
             dueDate,
             title: this.title,
@@ -131,6 +126,8 @@ export default {
             todos: this.todos,
             id: this.activeListId
           });
+
+          this.setFormType("New");
         }
 
         this.changeView();
