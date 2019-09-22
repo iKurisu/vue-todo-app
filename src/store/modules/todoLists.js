@@ -1,4 +1,7 @@
-import { getLists, updateLists as updateStoredLists } from "../../utils";
+import {
+  getLists,
+  updateLists as updateStoredLists
+} from "../../utils/localStorage";
 
 const state = {
   lists: [],
