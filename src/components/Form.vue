@@ -75,7 +75,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(["changeView"]),
+    ...mapMutations(["changeView", "setFormType"]),
     ...mapActions(["addList", "updateList"]),
     updateFields() {
       if (this.formType === "Edit") {
@@ -126,6 +126,8 @@ export default {
             todos: this.todos,
             id: this.activeListId
           });
+
+          this.setFormType("New");
         }
 
         this.changeView();
