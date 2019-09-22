@@ -3,7 +3,7 @@ const state = {
 };
 
 const mutations = {
-  setFormType({ state }, type) {
+  setFormType(state, type) {
     state.type = type;
   }
 };
