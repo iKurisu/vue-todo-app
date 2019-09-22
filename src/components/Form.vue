@@ -122,8 +122,7 @@ export default {
             dueDate,
             title: this.title,
             todos: this.todos,
-            id: uniqid(),
-            isActive: true
+            id: uniqid()
           });
         } else {
           this.updateList({
