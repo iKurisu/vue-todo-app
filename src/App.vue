@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <Navigation :set-form-type="setFormType" />
+    <Navigation />
     <MainView />
-    <FormView :type="formType" />
+    <FormView />
   </div>
 </template>
 
@@ -19,21 +19,12 @@ export default {
     FormView,
     Navigation
   },
-  data() {
-    return {
-      activeId: "",
-      formType: "new"
-    };
-  },
   created() {
     this.loadLists();
   },
   methods: {
     ...mapMutations(["changeView"]),
-    ...mapActions(["loadLists"]),
-    setFormType(type) {
-      this.formType = type;
-    }
+    ...mapActions(["loadLists"])
   }
 };
 </script>
