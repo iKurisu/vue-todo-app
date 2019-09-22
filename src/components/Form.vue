@@ -68,39 +68,44 @@ export default {
   },
   watch: {
     formType() {
-      this.updateFields();
+      this.formType === "New" ? this.resetForm() : this.updateForm();
     },
     activeList() {
-      this.updateFields();
+      if (this.formType === "Edit") this.updateForm();
     }
   },
   methods: {
     ...mapMutations(["changeView", "setFormType"]),
     ...mapActions(["addList", "updateList"]),
-    updateFields() {
-      if (this.formType === "Edit") {
-        this.title = this.activeList.title;
-        this.dueDate = ISOToShort(this.activeList.dueDate.toISOString());
-        this.todos = this.activeList.todos;
-      } else {
-        this.title = "";
-        this.dueDate = "";
-        this.todos = [];
-      }
+    resetForm() {
+      this.updateTitle("");
+      this.updateDueDate("");
+      this.updateTodos([]);
+    },
+    updateForm() {
+      const { title, dueDate, todos } = this.activeList;
+
+      this.updateTitle(title);
+      this.updateDueDate(ISOToShort(dueDate.toISOString()));
+      this.updateTodo("");
+      this.updateTodos(todos);
     },
     updateTitle(value) {
       this.title = value.toUpperCase();
     },
     updateDueDate(value) {
-      this.dueDate = value.toUpperCase();
+      this.dueDate = value;
     },
     updateTodo(value) {
       this.todo = value.toUpperCase();
     },
+    updateTodos(todos) {
+      this.todos = todos;
+    },
     addTodo(e) {
       e.preventDefault();
       this.todos.push({ name: this.todo, id: uniqid(), checked: false });
-      this.todo = "";
+      this.updateTodo("");
     },
     removeTodo(id) {
       this.todos = this.todos.filter(todo => todo.id !== id);
@@ -111,27 +116,30 @@ export default {
       this.titleError = this.title === "";
       this.dateError = !dueDate.getTime() || dueDate.getTime() < Date.now();
 
-      if (!this.titleError && !this.dateError) {
-        if (this.formType === "New") {
-          this.addList({
-            dueDate,
-            title: this.title,
-            todos: this.todos,
-            id: uniqid()
-          });
-        } else {
-          this.updateList({
-            dueDate,
-            title: this.title,
-            todos: this.todos,
-            id: this.activeListId
-          });
-
-          this.setFormType("New");
-        }
-
-        this.changeView();
+      if (this.titleError || this.dateError) {
+        return;
       }
+
+      if (this.formType === "New") {
+        this.addList({
+          dueDate,
+          title: this.title,
+          todos: this.todos,
+          id: uniqid()
+        });
+      } else {
+        this.updateList({
+          dueDate,
+          title: this.title,
+          todos: this.todos,
+          id: this.activeListId
+        });
+
+        this.setFormType("New");
+      }
+
+      this.resetForm();
+      this.changeView();
     }
   }
 };
