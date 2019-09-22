@@ -32,25 +32,19 @@ export default {
   components: {
     NavigationButton
   },
-  props: {
-    setFormType: {
-      type: Function,
-      required: true
-    }
-  },
   computed: mapState({
     activeView: ({ view }) => view.activeView
   }),
   methods: {
-    ...mapMutations(["changeView"]),
+    ...mapMutations(["changeView", "setFormType"]),
     ...mapActions(["deleteList"]),
     setNewForm() {
       this.changeView();
-      this.setFormType("new");
+      this.setFormType("New");
     },
     setEditForm() {
       this.changeView();
-      this.setFormType("edit");
+      this.setFormType("Edit");
     }
   }
 };
