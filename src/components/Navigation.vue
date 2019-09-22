@@ -1,7 +1,7 @@
 <template>
   <div class="nav top">
     <NavigationButton
-      v-if="activeView === 'Form'"
+      v-if="activeView === 'Form' && !listIsEmpty"
       :name="'GO BACK'"
       :click="setNewForm"
     />
@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from "vuex";
+import { mapState, mapGetters, mapMutations, mapActions } from "vuex";
 import NavigationButton from "./navigation/Button.vue";
 
 export default {
@@ -32,9 +32,12 @@ export default {
   components: {
     NavigationButton
   },
-  computed: mapState({
-    activeView: ({ view }) => view.activeView
-  }),
+  computed: {
+    ...mapState({
+      activeView: ({ view }) => view.activeView
+    }),
+    ...mapGetters(["listIsEmpty"])
+  },
   methods: {
     ...mapMutations(["changeView", "setFormType"]),
     ...mapActions(["deleteList"]),

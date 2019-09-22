@@ -18,6 +18,9 @@ const getters = {
         id: ""
       }
     );
+  },
+  listIsEmpty({ lists }) {
+    return lists.length === 0;
   }
 };
 
@@ -71,9 +74,14 @@ const actions = {
     commit("updateList", updatedList);
     updateStoredLists(state.lists);
   },
-  deleteList({ state, commit }) {
+  deleteList({ state, commit, getters }) {
     commit("deleteList");
-    commit("setActiveListId", state.lists.length > 0 ? state.lists[0].id : "");
+    commit("setActiveListId", !getters.listIsEmpty ? state.lists[0].id : "");
+
+    if (getters.listIsEmpty) {
+      commit("changeView", "Form", { root: true });
+    }
+
     updateStoredLists(state.lists);
   },
   checkTodo({ state, commit }, todoId) {
