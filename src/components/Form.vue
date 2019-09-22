@@ -41,6 +41,7 @@ import { mapMutations, mapActions, mapState, mapGetters } from "vuex";
 import uniqid from "uniqid";
 import FormField from "./form/VField";
 import FormTodo from "./form/VTodo";
+import { ISOToShort } from "../utils/date";
 
 export default {
   name: "Form",
@@ -83,13 +84,8 @@ export default {
     ...mapActions(["addList", "updateList"]),
     updateFields() {
       if (this.type === "edit") {
-        const date = new Date(this.activeList.dueDate);
-        const day = date.getDate();
-        const month = date.getMonth() + 1;
-        const year = date.getFullYear();
-
         this.title = this.activeList.title;
-        this.dueDate = `${month}/${day}/${year}`;
+        this.dueDate = ISOToShort(this.activeList.dueDate.toISOString());
         this.todos = this.activeList.todos;
       } else {
         this.title = "";
