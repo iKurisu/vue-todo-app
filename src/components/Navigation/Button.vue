@@ -46,7 +46,7 @@ export default {
   cursor: pointer;
 }
 
-.btn:not(:last-child) {
+.btn:not(:first-child):not(:last-child) {
   margin-right: 20px;
 }
 

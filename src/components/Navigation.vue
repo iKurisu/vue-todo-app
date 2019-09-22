@@ -1,22 +1,22 @@
 <template>
   <div class="nav top">
     <NavigationButton
-      v-if="activeView === 'Form' && !listIsEmpty"
+      v-show="formIsVisible && !listIsEmpty"
       :name="'GO BACK'"
       :click="setNewForm"
     />
     <NavigationButton
-      v-if="activeView === 'Main'"
+      v-show="mainIsVisible"
       :name="'NEW LIST'"
       :click="setNewForm"
     />
     <NavigationButton
-      v-if="activeView === 'Main'"
+      v-show="mainIsVisible"
       :name="'EDIT LIST'"
       :click="setEditForm"
     />
     <NavigationButton
-      v-if="activeView === 'Main'"
+      v-show="mainIsVisible"
       :name="'DELETE LIST'"
       :click="deleteList"
     />
@@ -36,7 +36,7 @@ export default {
     ...mapState({
       activeView: ({ view }) => view.activeView
     }),
-    ...mapGetters(["listIsEmpty"])
+    ...mapGetters(["listIsEmpty", "formIsVisible", "mainIsVisible"])
   },
   methods: {
     ...mapMutations(["changeView", "setFormType"]),
