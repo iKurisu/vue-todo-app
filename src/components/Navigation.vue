@@ -1,22 +1,22 @@
 <template>
   <div class="nav top">
     <NavigationButton
-      v-if="activeView === 'Form' && !listIsEmpty"
+      v-show="activeView === 'Form' && !listIsEmpty"
       :name="'GO BACK'"
       :click="setNewForm"
     />
     <NavigationButton
-      v-if="activeView === 'Main'"
+      v-show="activeView === 'Main'"
       :name="'NEW LIST'"
       :click="setNewForm"
     />
     <NavigationButton
-      v-if="activeView === 'Main'"
+      v-show="activeView === 'Main'"
       :name="'EDIT LIST'"
       :click="setEditForm"
     />
     <NavigationButton
-      v-if="activeView === 'Main'"
+      v-show="activeView === 'Main'"
       :name="'DELETE LIST'"
       :click="deleteList"
     />
