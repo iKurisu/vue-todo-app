@@ -74,6 +74,7 @@ export default {
     activeView() {
       if (this.activeView === "Main") {
         this.resetForm();
+        this.resetErrors();
       }
     },
     activeList() {
