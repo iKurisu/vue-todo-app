@@ -131,14 +131,14 @@ export default {
 
       if (this.formType === "New") {
         this.addList({
-          dueDate,
+          dueDate: dueDate.toISOString(),
           title: this.title,
           todos: this.todos,
           id: uniqid()
         });
       } else {
         this.updateList({
-          dueDate,
+          dueDate: dueDate.toISOString(),
           title: this.title,
           todos: this.todos,
           id: this.activeListId
