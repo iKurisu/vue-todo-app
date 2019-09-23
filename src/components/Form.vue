@@ -80,6 +80,7 @@ export default {
     resetForm() {
       this.updateTitle("");
       this.updateDueDate("");
+      this.updateTodo("");
       this.updateTodos([]);
     },
     updateForm() {
