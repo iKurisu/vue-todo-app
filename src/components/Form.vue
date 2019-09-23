@@ -76,9 +76,6 @@ export default {
         this.resetForm();
         this.resetErrors();
       }
-    },
-    activeList() {
-      if (this.formType === "Edit") this.updateForm();
     }
   },
   methods: {
