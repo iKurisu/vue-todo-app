@@ -62,13 +62,19 @@ export default {
   computed: {
     ...mapState({
       activeListId: state => state.todoLists.activeListId,
-      formType: state => state.form.type
+      formType: state => state.form.type,
+      activeView: state => state.view.activeView
     }),
     ...mapGetters(["activeList"])
   },
   watch: {
     formType() {
       this.formType === "New" ? this.resetForm() : this.updateForm();
+    },
+    activeView() {
+      if (this.activeView === "Main") {
+        this.resetForm();
+      }
     },
     activeList() {
       if (this.formType === "Edit") this.updateForm();
@@ -77,6 +83,10 @@ export default {
   methods: {
     ...mapMutations(["changeView", "setFormType"]),
     ...mapActions(["addList", "updateList"]),
+    resetErrors() {
+      this.titleError = false;
+      this.dateError = false;
+    },
     resetForm() {
       this.updateTitle("");
       this.updateDueDate("");
