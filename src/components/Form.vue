@@ -95,7 +95,7 @@ export default {
       const { title, dueDate, todos } = this.activeList;
 
       this.updateTitle(title);
-      this.updateDueDate(ISOToShort(dueDate.toISOString()));
+      this.updateDueDate(ISOToShort(dueDate));
       this.updateTodo("");
       this.updateTodos(todos);
     },
@@ -131,14 +131,14 @@ export default {
 
       if (this.formType === "New") {
         this.addList({
-          dueDate,
+          dueDate: dueDate.toISOString(),
           title: this.title,
           todos: this.todos,
           id: uniqid()
         });
       } else {
         this.updateList({
-          dueDate,
+          dueDate: dueDate.toISOString(),
           title: this.title,
           todos: this.todos,
           id: this.activeListId
