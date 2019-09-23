@@ -95,7 +95,7 @@ export default {
       const { title, dueDate, todos } = this.activeList;
 
       this.updateTitle(title);
-      this.updateDueDate(ISOToShort(dueDate.toISOString()));
+      this.updateDueDate(ISOToShort(dueDate));
       this.updateTodo("");
       this.updateTodos(todos);
     },
