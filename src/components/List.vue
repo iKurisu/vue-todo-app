@@ -34,7 +34,7 @@ export default {
       const itemHeight = 38;
       const listsShown = 13;
       const max = 0;
-      const min = -(this.lists.length - listsShown) * itemHeight - 21;
+      const min = -(this.lists.length - listsShown) * itemHeight;
 
       if (Date.now() - this.lastScroll < 200) return;
 
