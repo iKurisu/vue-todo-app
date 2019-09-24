@@ -31,7 +31,7 @@ export default {
   }),
   methods: {
     handleScroll(e) {
-      const itemHeight = 37;
+      const itemHeight = 38;
       const max = 0;
       const min = -(this.list.length - 16) * itemHeight - 21;
       const d = 148;
