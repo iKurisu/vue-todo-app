@@ -1,5 +1,6 @@
 <template>
-  <div class="list" @wheel="handleScroll">
+  <div class="list-wrapper" @wheel="handleScroll">
+    <div class="list" :style="{ transform: `translate3d(0, ${offset}px, 0)` }">
     <ListItem
       v-for="list in lists"
       :key="list.id"
@@ -7,6 +8,7 @@
       :active-list-id="activeListId"
       :offset="offset"
     />
+  </div>
   </div>
 </template>
 
@@ -59,18 +61,23 @@ export default {
 </script>
 
 <style lang="scss">
-.list {
+.list-wrapper {
   height: 50vh;
   overflow-y: hidden;
   margin-left: 10%;
   margin-top: 20vh;
+}
+
+.list {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  will-change: transform;
+  transition: transform 0.5s ease;
 }
 
 @media (max-width: 767px) {
-  .list {
+  .list-wrapper {
     margin-left: 5%;
   }
 }

@@ -1,7 +1,6 @@
 <template>
   <div
     class="list-item"
-    :style="{ transform: `translate3d(0, ${offset}px, 0)` }"
     @click="setActiveListId(list.id)"
     @mouseover="setHover(true)"
     @mouseleave="setHover(false)"
@@ -52,8 +51,6 @@ export default {
 .list-item {
   margin-bottom: 16px;
   cursor: pointer;
-  will-change: transform;
-  transition: transform 0.5s ease;
 }
 
 .list-item p {
