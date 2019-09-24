@@ -32,8 +32,9 @@ export default {
   methods: {
     handleScroll(e) {
       const itemHeight = 38;
+      const listsShown = 13;
       const max = 0;
-      const min = -(this.lists.length - 16) * itemHeight - 21;
+      const min = -(this.lists.length - listsShown) * itemHeight - 21;
 
       if (Date.now() - this.lastScroll < 200) return;
 
