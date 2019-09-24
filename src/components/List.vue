@@ -1,14 +1,13 @@
 <template>
   <div class="list-wrapper" @wheel="handleScroll">
     <div class="list" :style="{ transform: `translate3d(0, ${offset}px, 0)` }">
-    <ListItem
-      v-for="list in lists"
-      :key="list.id"
-      :list="list"
-      :active-list-id="activeListId"
-      :offset="offset"
-    />
-  </div>
+      <ListItem
+        v-for="list in lists"
+        :key="list.id"
+        :list="list"
+        :active-list-id="activeListId"
+      />
+    </div>
   </div>
 </template>
 

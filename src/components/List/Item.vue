@@ -27,10 +27,6 @@ export default {
     activeListId: {
       type: String,
       required: true
-    },
-    offset: {
-      type: Number,
-      required: true
     }
   },
   data() {
