@@ -35,6 +35,7 @@ export default {
       const listsShown = 13;
       const max = 0;
       const min = -(this.lists.length - listsShown) * itemHeight;
+      const d = 148 > Math.abs(min) ? Math.abs(min) : 148;
 
       if (Date.now() - this.lastScroll < 200) return;
 
