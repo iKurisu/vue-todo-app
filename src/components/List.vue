@@ -25,16 +25,23 @@ export default {
       lastScroll: null
     };
   },
-  computed: mapState({
-    lists: state => state.todoLists.lists,
-    activeListId: state => state.todoLists.activeListId
-  }),
+  computed: {
+    ...mapState({
+      lists: state => state.todoLists.lists,
+      activeListId: state => state.todoLists.activeListId
+    }),
+    listsShown() {
+      const wrapperHeight = window.innerHeight / 2;
+      const itemHeight = 38;
+
+      return Math.floor(wrapperHeight / itemHeight);
+    }
+  },
   methods: {
     handleScroll(e) {
       const itemHeight = 38;
-      const listsShown = 13;
       const max = 0;
-      const min = -(this.lists.length - listsShown) * itemHeight;
+      const min = -(this.lists.length - this.listsShown) * itemHeight;
       const d = 148 > Math.abs(min) ? Math.abs(min) : 148;
 
       if (Date.now() - this.lastScroll < 200) return;
